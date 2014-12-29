@@ -3,7 +3,7 @@ function [min_row, max_row, min_col, max_col] = suryanarayana(img, MIN_HEIGHT_CH
 
 if(ischar(img)), img = imread(img);
 end
-subplot(1,2,1); imshow(img);
+%subplot(1,2,1); imshow(img);
 
 if(nargin == 1),
     MIN_HEIGHT_CHAR = 5;
@@ -67,4 +67,5 @@ for i = 1 : num,
     nimg = nimg + img_candidate;
 end
 subplot(1,2,2); imshow(nimg.*img);
+
 

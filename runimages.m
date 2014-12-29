@@ -1,14 +1,14 @@
 close all
 imtool close all
 
-fileID = fopen('plates.txt');
+fileID = fopen('/home/hweber/Videos/filmagens_rua/dados/cristiano_fischer_1010.txt');
 nplates = fscanf(fileID,'%d %d',2);
 
 j=0;
 J=[];
 while ~feof(fileID)
     
-   name=strcat('C:\Users\kurt\_CODES\_opencv\video_to_frame\',num2str(j),'.png');
+   name=strcat('/home/hweber/Videos/filmagens_rua/dados/frames_cristiano_fischer_1410/',num2str(j),'.png');
    %[min_row, max_row, min_col, max_col]=suryanarayana(name)
     
    numplates = nplates(2);
@@ -17,8 +17,8 @@ while ~feof(fileID)
    end
    nplates = fscanf(fileID,'%d %d',2);
    if nplates(2) > 0
-       %[min_row, max_row, min_col, max_col]=vlpl(name);
-       [min_row, max_row, min_col, max_col]=suryanarayana(name);
+       [min_row, max_row, min_col, max_col]=vlpl(name);
+       %[min_row, max_row, min_col, max_col]=suryanarayana(name);
        for i=1:length(min_row)
            algorithm=[min_col(i), min_row(i), max_col(i)-min_col(i), max_row(i)-min_row(i)];
            areaA=algorithm(3)*algorithm(4);
@@ -29,9 +29,9 @@ while ~feof(fileID)
 
        end
    else
-       for i=1:length(min_row)
+       %for i=1:length(min_row)
            J(end+1)=-1;
-       end
+       %end
    end
       
    J(end)
