@@ -1,4 +1,4 @@
-function nimg = suryanarayana(img, MIN_HEIGHT_CHAR, MAX_HEIGHT_CHAR, ...
+function [min_row, max_row, min_col, max_col] = suryanarayana(img, MIN_HEIGHT_CHAR, MAX_HEIGHT_CHAR, ...
     MIN_WIDTH_VLP, MAX_DISTANCE_CHARS, FINAL_DILATION_SIZE)
 
 if(ischar(img)), img = imread(img);
@@ -6,10 +6,10 @@ end
 subplot(1,2,1); imshow(img);
 
 if(nargin == 1),
-    MIN_HEIGHT_CHAR = 12;
-    MAX_HEIGHT_CHAR = 53;
-    MIN_WIDTH_VLP = 7;
-    MAX_DISTANCE_CHARS = 31;
+    MIN_HEIGHT_CHAR = 5;
+    MAX_HEIGHT_CHAR = 20;
+    MIN_WIDTH_VLP = 37;
+    MAX_DISTANCE_CHARS = 11;
     FINAL_DILATION_SIZE = 11;
 end
 
@@ -47,16 +47,24 @@ img_proc = imopen(img_proc, se);
 % Final adjustment based on the database features
 [l num] = bwlabel(img_proc, 8);
 nimg = zeros([height width]);
-
+min_row=[];
+max_row=[];
+min_col=[];
+max_col=[];
 for i = 1 : num,
     [rows cols] = find(l == i);
-    
     img_candidate = zeros([height width]);
     img_candidate(min(rows) : max(rows) , min(cols) : max(cols)) = 1;
 
     se = ones([FINAL_DILATION_SIZE 1]);
     img_candidate = imdilate(img_candidate, se);
-    img_candidate
+    imshow(img_candidate);
+    [row,col]=find(img_candidate);
+    min_row(end+1)=min(row);
+    max_row(end+1)=max(row);
+    min_col(end+1)=min(col);
+    max_col(end+1)=max(col);
     nimg = nimg + img_candidate;
 end
 subplot(1,2,2); imshow(nimg.*img);
+

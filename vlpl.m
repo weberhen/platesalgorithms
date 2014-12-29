@@ -18,7 +18,7 @@ function [min_row, max_row, min_col, max_col] = vlpl(img, MIN_HEIGHT_CHAR, MAX_H
 
 if(ischar(img)), img = imread(img);
 end
-subplot(1,2,1); imshow(img);
+%subplot(1,2,1); imshow(img);
 
 if(nargin == 1),
     MIN_HEIGHT_CHAR = 2;
@@ -213,6 +213,6 @@ for ind = 1 : 2,
    max_row=max(row);
    min_col=min(col);
    max_col=max(col);
-    subplot(1,2,2); imshow(nimg.*img);
+    %subplot(1,2,2); imshow(nimg.*img);
     return;
 end
